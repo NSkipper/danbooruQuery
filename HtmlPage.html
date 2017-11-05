@@ -36,10 +36,14 @@
                 </form>
             </div>-->
             <!--Searching works only for correctely typed tags, but user wont know what tags are available. so something else is needed to make search -->
-            <select v-model="selectedTag">
-                <option value="all" checked>All</option>
-                <option v-for="tags in availableTags">{{tags}}</option>
-            </select> 
+            <div>
+                <select v-model="selectedTag">
+                    <option value="all" checked>All</option>
+                    <option v-for="tags in availableTags">{{tags}}</option>
+                </select> 
+                <button v-on:click="addNewTag()">Submit</button>
+            </div>
+            
             <!-- Main body -->
             <!-- Put something here-->
             <div class="col-sm-2"></div>
