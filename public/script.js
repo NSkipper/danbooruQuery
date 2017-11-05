@@ -6,7 +6,6 @@
         mainIMGLinks: '',
         mainIMGArtistName: '',
         selectedTag: '',
-        newTagAdded: false,
         baseURL: 'https://danbooru.donmai.us/posts.json?login=Skipperno1&api_key=biY49xTSc6ZGnGfSPz_J0-5ei5j03Qs467QDLd0s350&',
         desiredTags: 'tags=landscape',
         ignoredTags: '',
@@ -34,40 +33,21 @@
                 .catch(function (error) {
                     console.log(error);
                 });
-
-            //console.log(self.queryResults);
-
         },
         addLinks: function () {
-            var self = this;            
+            var self = this;
+            this.imgLinks = [];
             for (var i = 0; i < this.queryResults.length; i++) {
                 //console.log(this.queryResults[i]);
                 var danbooruBaseURL = "https://danbooru.donmai.us";
-                //var mule = self.queryResults[i].file_url;
-                //The url returned from the json is only partial, and need to be appened to the domain name
-                if (!this.newTagAdded) {
-                    var finalPreviewLink = danbooruBaseURL.concat(this.queryResults[i].preview_file_url);
-                    var finalNormalLink = danbooruBaseURL.concat(this.queryResults[i].large_file_url);
-                    this.imgLinks.push({
-                        finalPreviewLink: finalPreviewLink,
-                        finalNormalLink: finalNormalLink,
-                        imageArtistName: this.queryResults[i].tag_string_artist
-                    });
-                }
-
-
-                if (this.newTagAdded) {
-                    var finalPreviewLink = danbooruBaseURL.concat(this.queryResults[i].preview_file_url);
-                    var finalNormalLink = danbooruBaseURL.concat(this.queryResults[i].large_file_url);
-                    //used when the combobox get updated
-                    var updatedLinks = [];
-                    updatedLinks.push({
-                        finalPreviewLink: finalPreviewLink,
-                        finalNormalLink: finalNormalLink,
-                        imageArtistName: this.queryResults[i].tag_string_artist
-                    });
-                    this.imgLinks = updatedLinks;
-                }
+                //The url returned from the json is only partial, and need to be appened to the domain name   
+                var finalPreviewLink = danbooruBaseURL.concat(this.queryResults[i].preview_file_url);
+                var finalNormalLink = danbooruBaseURL.concat(this.queryResults[i].large_file_url);
+                this.imgLinks.push({
+                    finalPreviewLink: finalPreviewLink,
+                    finalNormalLink: finalNormalLink,
+                    imageArtistName: this.queryResults[i].tag_string_artist
+                });                  
             }
         
             this.mainIMGLinks = this.imgLinks[0].finalNormalLink;
@@ -78,9 +58,8 @@
             this.jsonURL = this.baseURL.concat(this.desiredTags)
                 .concat("+").concat(this.selectedTag)
                 .concat(this.ignoredTags)
-                .concat(this.numberOfItemRetrieved)
-                
-            this.fetchData();
+                .concat(this.numberOfItemRetrieved)               
+            this.fetchData();            
         }
     },
     computed: {
@@ -110,11 +89,9 @@
             .concat(this.numberOfItemRetrieved)
         //calling the method which load the json file at the loading of the page
         this.fetchData();
-        //this.addLinks();
     },
     //no idea what to do here
     updated: function () {
         console.log(this.jsonURL);
-        //this.fetchData();
     }
 })
