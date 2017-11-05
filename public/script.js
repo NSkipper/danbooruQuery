@@ -73,7 +73,7 @@
             this.mainIMGLinks = this.imgLinks[0].finalNormalLink;
             this.mainIMGArtistName = this.imgLinks[0].imageArtistName;
         },
-
+        //Adding user filter to the API URL, then call it to be load again.
         addNewTag: function () {
             this.jsonURL = this.baseURL.concat(this.desiredTags)
                 .concat("+").concat(this.selectedTag)
@@ -102,12 +102,13 @@
             return result;
         }
     },
-    //calling the method which load the json file at the loading of the page
+    
     created: function () {
+        //Creating the API call URL which we are using
         this.jsonURL = this.baseURL.concat(this.desiredTags)
             .concat(this.ignoredTags)
             .concat(this.numberOfItemRetrieved)
-            //.concat("&").concat(this.selectedTag);
+        //calling the method which load the json file at the loading of the page
         this.fetchData();
         //this.addLinks();
     },
