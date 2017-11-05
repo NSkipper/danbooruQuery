@@ -89,7 +89,7 @@
             var mules = [];
             var result = [];
             //predefining tags to have something to work with.
-            mules.push({ tag: "mountain" });
+            
             mules.push({ tag: "hill" });
 
             mules = _.sortBy(mules, 'tag')
