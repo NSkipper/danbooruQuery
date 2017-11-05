@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Danbooru Query</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="Content/bootstrap.css"/>
+    <!-- Script -->
+    <!--<script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/jquery-1.9.1.js"></script>-->
+    <title></title>
+</head>
+<body>
+    <div id="app">
+        <!-- Nav bar-->
+        <div>
+            <div>
+                <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="#">DRQuery</a>
+                        </div>
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Main Page</a></li>
+                            <li><a href="#">To be implemented</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <!--Searchbar-->
+            <!--<div>               
+                <form class="searchbar">
+                    <input v-model="newSearch" placeholder="Searching for..." />
+                    <input type="submit" value="Search" class="btn" />
+                </form>
+            </div>-->
+            <!--Searching works only for correctely typed tags, but user wont know what tags are available. so something else is needed to make search -->
+            <select v-model="selectedTag">
+                <option value="all" checked>All</option>
+                <option v-for="tags in availableTags">{{tags}}</option>
+            </select> 
+            <!-- Main body -->
+            <!-- Put something here-->
+            <div class="col-sm-2"></div>
+            <!-- Initial image loop -->
+            <div class="col-sm-2">
+                <div v-for="link in imgLinks">
+                    <img class="img-responsive" v-bind:src="link.finalPreviewLink" />
+                </div>
+            </div>
+            <!-- Put something here-->
+            <div class="col-sm-6" >
+                <!-- Main middle image-->
+                <div >
+                    <img class="img-responsive" v-bind:src="mainIMGLinks" />
+                </div>
+                <!-- Main Image information-->
+                <div>
+                    <p>Artist name: {{mainIMGArtistName}}</p>
+                </div>
+            </div>
+            <!-- Put something here-->
+            <div class="col-sm-2"></div>
+        </div>
+        </div>
+
+
+    <script src="Scripts/lodash.js"></script>
+    <script src="Scripts/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="public/script.js"></script>
+</body>
+</html>
